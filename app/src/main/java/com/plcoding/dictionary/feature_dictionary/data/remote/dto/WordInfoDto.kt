@@ -6,7 +6,7 @@ import com.plcoding.dictionary.feature_dictionary.domain.model.WordInfo
 
 data class WordInfoDto(
     val meanings: List<MeaningDto>,
-    val origin: String,
+    val origin: String?, // <-- make nullable
     val phonetic: String,
     val phonetics: List<PhoneticDto>,
     val word: String
@@ -14,7 +14,7 @@ data class WordInfoDto(
     fun toWordInfoEntity(): WordInfoEntity {
         return WordInfoEntity(
             meanings = meanings.map { it.toMeaning() },
-            origin = origin,
+            origin = this.origin ?: "", // <-- safely replace null with ""
             phonetic = phonetic,
             word = word
         )

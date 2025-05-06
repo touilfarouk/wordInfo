@@ -9,7 +9,7 @@ import com.plcoding.dictionary.feature_dictionary.domain.model.WordInfo
 data class WordInfoEntity(
     val word: String,
     val phonetic: String,
-    val origin: String,
+    val origin: String?, // <-- make nullable
     val meanings: List<Meaning>,
     @PrimaryKey val id: Int? = null
 ) {
@@ -17,7 +17,7 @@ data class WordInfoEntity(
         return WordInfo(
             meanings = meanings,
             word = word,
-            origin = origin,
+            origin = this.origin ?: "", // <-- safely replace null with ""
             phonetic = phonetic
         )
     }
