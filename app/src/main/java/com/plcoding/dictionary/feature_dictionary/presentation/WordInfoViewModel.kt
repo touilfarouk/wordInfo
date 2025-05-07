@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.plcoding.dictionary.core.util.Resource
+import com.plcoding.dictionary.feature_dictionary.domain.use_case.GetSavedWordInfos
 import com.plcoding.dictionary.feature_dictionary.domain.use_case.GetWordInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WordInfoViewModel @Inject constructor(
-    private val getWordInfo: GetWordInfo
+    private val getWordInfo: GetWordInfo,
+    private val getSavedWordInfos: GetSavedWordInfos
 ) : ViewModel() {
 
     private val _searchQuery = mutableStateOf("")
@@ -31,7 +33,22 @@ class WordInfoViewModel @Inject constructor(
     val eventFlow = _eventFlow.asSharedFlow()
 
     private var searchJob: Job? = null
+    init {
+        loadSavedWords()
+    }
 
+    private fun loadSavedWords() {
+        viewModelScope.launch {
+            getSavedWordInfos()
+                .onEach { savedWords ->
+                    _state.value = state.value.copy(
+                        wordInfoItems = savedWords,
+                        isLoading = false
+                    )
+                }
+                .launchIn(this)
+        }
+    }
     fun onSearch(query: String) {
         _searchQuery.value = query
         searchJob?.cancel()

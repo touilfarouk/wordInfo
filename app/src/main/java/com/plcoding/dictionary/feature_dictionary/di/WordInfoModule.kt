@@ -10,6 +10,7 @@ import com.plcoding.dictionary.feature_dictionary.data.remote.DictionaryApi
 import com.plcoding.dictionary.feature_dictionary.data.repository.WordInfoRepositoryImpl
 import com.plcoding.dictionary.feature_dictionary.data.util.GsonParser
 import com.plcoding.dictionary.feature_dictionary.domain.repository.WordInfoRepository
+import com.plcoding.dictionary.feature_dictionary.domain.use_case.GetSavedWordInfos
 import com.plcoding.dictionary.feature_dictionary.domain.use_case.GetWordInfo
 import dagger.Module
 import dagger.Provides
@@ -59,5 +60,10 @@ object WordInfoModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(DictionaryApi::class.java)
+    }
+    @Provides
+    @Singleton
+    fun provideGetSavedWordInfosUseCase(repository: WordInfoRepository): GetSavedWordInfos {
+        return GetSavedWordInfos(repository)
     }
 }
