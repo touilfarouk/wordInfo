@@ -3,8 +3,7 @@ package com.plcoding.dictionary.feature_dictionary.data.local
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.google.gson.reflect.TypeToken
-import com.plcoding.dictionary.feature_dictionary.data.util.GsonParser
-import com.plcoding.dictionary.feature_dictionary.data.util.JsonParser
+import com.plcoding.dictionary.core.util.JsonParser
 import com.plcoding.dictionary.feature_dictionary.domain.model.Meaning
 
 @ProvidedTypeConverter

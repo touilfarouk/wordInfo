@@ -1,4 +1,4 @@
-package com.plcoding.dictionary.feature_dictionary.data.util
+package com.plcoding.dictionary.core.util
 
 import com.google.gson.Gson
 import java.lang.reflect.Type
