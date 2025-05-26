@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.google.gson.Gson
 import com.plcoding.dictionary.feature_dictionary.data.local.Converters
-import com.plcoding.dictionary.feature_dictionary.data.local.WordInfoDatabase
+import com.plcoding.dictionary.core.WordInfoDatabase
 import com.plcoding.dictionary.feature_dictionary.data.remote.DictionaryApi
 import com.plcoding.dictionary.feature_dictionary.data.repository.WordInfoRepositoryImpl
 import com.plcoding.dictionary.core.util.GsonParser
